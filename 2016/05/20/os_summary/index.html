@@ -1,0 +1,290 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>OS | blogLi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Logn Li">
+    
+    <meta name="description" content="#操作系统(os)总结—-大学的课件(参考书：王爽的 8086汇编)
+
+我们先说一下操作系统的发展史，这样更有利于我们对这个技术脉络的把├——手工打孔 插卡├——单道批处理├—- 联机处理(可以批量处理作业但是一次只能处理一个作业)├            ├──– 脱机处理(缓和人机矛盾，使cpu">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="blogLi" title="blogLi"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="blogLi">blogLi</a></h1>
+				<h2 class="blog-motto">学生，码农，工程师</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:notelzg.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="[layout]" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/05/20/os_summary/" title="OS" itemprop="url">OS</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="https://notelzg.github.io" title="Logn Li">Logn Li</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-05-20T05:14:43.000Z" itemprop="datePublished">2016-05-20</time>
+    更新日期:<time datetime="2016-05-20T12:25:32.612Z" itemprop="dateModified">2016-05-20</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+		</div>
+		
+		<p>#操作系统(os)总结—-大学的课件(参考书：王爽的 8086汇编)</p>
+<ol>
+<li><p>我们先说一下操作系统的发展史，这样更有利于我们对这个技术脉络的把<br>├——手工打孔 插卡<br>├——单道批处理├—- 联机处理(可以批量处理作业但是一次只能处理一个作业)<br>├            ├──– 脱机处理(缓和人机矛盾，使cpu和输入输入设备并行处理)<br>├——多道批处理<br>├——分时系统<br>├——实时系统</p>
+<p>结构发展经历下面四个阶段：<br>├—— 无结构os结构（只是实现了功能）<br>├—— 模块化os结构（不利于数据共享，通讯）<br>├—— 分层式os结构（扩展度性不好）<br>├—— 微内核os结构（采用了面向对象的设计方法，现在用的系统基本都是微内核的）<br> 顺便说一下，我们经常提到的内核层开发，和用户层开发，所谓的内核层开发，就是<br> 使用操作系统内核开放的接口，编程。用户层开发就是使用普通的接口编程，比如windows<br> 的Win32 API 就是应用层开发，专门开发我们使用的软件。</p>
+<p>在我们学习文章的时候，经典的衔接段落经常起着承上启下的作用，os就是这样的<br>控制着下面的硬件，并且为上层的应用软件提供接口，图形化等服务。</p>
+</li>
+</ol>
+<p>#2. 我们先说呈上的部分也就是大家经常使用的，操作系统让我们看到的<br>   文件系统，提供的上层操作就是我们经常使用的目录 文件<br>   设备管理，平常使用的usb设备，键盘 鼠标 显示器  打印机等</p>
+<p>   当然这俩个部分，我们看到的内容，应该算是逻辑层面的东西，是操作系统为了更好的服务客户<br>   而设计出来的，毕竟最初的dos系统，就是我们开机看到的黑屏界面只是会显示一些字符仅此而已<br>   操作系统会把逻辑的操作转成具体的对硬件的处理，当然了这些细节都已经隐藏掉了。</p>
+<p>#3. 呈下部分，就是对硬件的处理了   </p>
+<pre><code>├—— cpu  就是处理器了，由寄存器 控制器 运算器和元器件通过总线连接起来的中央处理器
+├—— 内存 这个大家应该很熟悉的，手机也有就是的RAM
+├—— 设备 键盘 鼠标 显示器 打印机 等
+├—— 文件：磁盘 软盘 u盘等
+</code></pre><p>  以上基本就是OS所做的主要管理工作，通过对这些硬件的管理，我觉的其实就是对这些硬件的i/o操作<br>  而已，下面我们就看看操作系统是如何对他们进行读写，然后让整个系统为我们服务。</p>
+<p>##3.1 cpu 我们都知道，就是用来处理指令的，指令来自我们写的程序，那我们写的程序是怎么进入到内存，<br>  再进入到cpu呢，然后处理的呢，程序大体处理流程如下：</p>
+<pre><code>编写       编译           链接                  装入内存            创建pcb初始化，保存程序在内存中的地址
+</code></pre><p>  —–&gt; 源程序——&gt; 目标文件—-&gt; 二进制可执行文件———&gt; 创建进程————————————-<br>  分配资源，修改pcb相应的值，并且把pcb加入到就绪队列               通过进程调度算法得到cpu<br>  —————————————————&gt;等待cpu的执行————————&gt;程序开始执行</p>
+<p>  以上就是我理解的程序处理流程，如果有问题，请大家及时指出谢谢。从这里可以处理cpu就是用来处理进程的一系列操作，<br>  进程的创建，销毁 状态的转换 进程之间的通讯 同步 异步 并发 以及进程的调度。详细一点的如下图所示：</p>
+<p>##3.2 内存<br>          内存的主要作用就是给cpu提供数据，既然是内存那就避免不免的流程： 分配 回收<br>      我们所有的操作也都时围绕这俩点进行的，说道内存的分配那就肯定分为俩中情况： 连续  非连续 类似于数据结构<br>      的线性和非线性。<br>      连续分配内存就是很简单了，就是分配连续的内存，但是分配多少呢，这就是一个问题了，所以就分为固定内存的分配<br>      和动态内存的分配（根据程序，数据 大小），并且采用相关的分配算法。缺点：内存碎片化严重，所以我们聪明的程序<br>      员，又想出了非连续内存分配的方法，来弥补缺点，毕竟内存条很贵，并且容量有限。</p>
+<pre><code>离散分配(非连续): 就像书一样先把内存按照一定的大小分页，系统存在一张总的分页表，就跟我们平常见到的书目录是一样
+的，我们可以在程序装入内存的时候，把空合适的页面集合找出来然后，把程序存储进去。但是因为页比较小承载的数据有限
+但是我们的程序大小是不确定的，这样我们编写汇编代码对地址的处理就会比较麻烦，这个时候就需要分段了，就跟我们学习
+文章一样，文章分为不同的段落，有不同的作用，我们就把内存分段，按照需求分成不同的段。但是因为我们有的程序特别的大
+内存不够，这个时候产生了虚拟内存的概念，其实就是用了替换的思想，把当前需要处理的指令先存入内存，当把内存中的指令
+处理完毕之后，可以把剩下的指令再次调入内存，这样我们就可以用小于程序的内存来运行大于内存的程序，因为我们是内存是以
+段或者页位基础的，所以相应的置换算法就叫做，页面置换算法 ，段置换算法。当然了也可以把段和页结合起来，使用段页式
+内存管理，这样就可以结合俩者的优点。这里写的都是很粗略的东西，具体还是要看书。
+知识结构图如下：
+</code></pre><p>##3.3 设备<br>          设备的管理，发展到现在主要处理分为四步： — 应用程序的调用<br>                                                     — 设备独立性软件<br>                                                       — 设备驱动程序<br>                                                         — i/o 中断<br>      因为我们在编程的时候，读写文件就是通过一些库函数提供的方法，read write 等方法直接使用的，不管我换个操作系统，还是换个<br>      硬件对于我们编程事没有影响的，这个牛逼的功能就是设备独立性软件提供的，让我们对设备的操作独立于设备硬件，在这一层会把逻辑<br>      设备转为物理设备，并且调用设备驱动程序来处理相应的i/o 操作。</p>
+<pre><code>只是结构图如下： 
+</code></pre><p>##3.4 文件<br>          文件的逻辑结构，物理机构</p>
+<pre><code>只是结构图如下： 
+</code></pre><p>–&gt;</p>
+<p>-&gt;</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="https://notelzg.github.io/2016/05/20/os_summary/" data-title="OS | blogLi" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/05/20/OS/" title="OS">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  OS</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/05/20/postName/"  title="postName">
+ <strong>NEXT:</strong><br/> 
+ <span>postName
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2016 
+		
+		<a href="https://notelzg.github.io" target="_blank" title="Logn Li">Logn Li</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+
+
+
+
+
+  </body>
+ </html>
