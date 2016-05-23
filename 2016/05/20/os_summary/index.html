@@ -74,7 +74,7 @@
     </p>
   <p class="article-time">
     <time datetime="2016-05-20T05:14:43.000Z" itemprop="datePublished">2016-05-20</time>
-    更新日期:<time datetime="2016-05-20T13:27:24.828Z" itemprop="dateModified">2016-05-20</time>
+    更新日期:<time datetime="2016-05-23T01:33:38.333Z" itemprop="dateModified">2016-05-23</time>
     
   </p>
 </header>
@@ -83,7 +83,7 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#操作系统-os-总结—-大学的课件-参考书：王爽的-8086汇编"><span class="toc-number">1.</span> <span class="toc-text">操作系统(os)总结—-大学的课件(参考书：王爽的 8086汇编)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-我们先说呈上的部分也就是大家经常使用的，操作系统让我们看到的"><span class="toc-number">2.</span> <span class="toc-text">2. 我们先说呈上的部分也就是大家经常使用的，操作系统让我们看到的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-呈下部分，就是对硬件的处理了"><span class="toc-number">3.</span> <span class="toc-text">3. 呈下部分，就是对硬件的处理了</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-cpu-我们都知道，就是用来处理指令的，指令来自我们写的程序，那我们写的程序是怎么进入到内存，"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 cpu 我们都知道，就是用来处理指令的，指令来自我们写的程序，那我们写的程序是怎么进入到内存，</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-内存"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 内存</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#操作系统-os-总结—-大学的课件-参考书：王爽的-8086汇编"><span class="toc-number">1.</span> <span class="toc-text">操作系统(os)总结—-大学的课件(参考书：王爽的 8086汇编)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-我们先说呈上的部分也就是大家经常使用的，操作系统让我们看到的"><span class="toc-number">2.</span> <span class="toc-text">2. 我们先说呈上的部分也就是大家经常使用的，操作系统让我们看到的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-呈下部分，就是对硬件的处理了"><span class="toc-number">3.</span> <span class="toc-text">3. 呈下部分，就是对硬件的处理了</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-cpu-我们都知道，就是用来处理指令的，指令来自我们写的程序，那我们写的程序是怎么进入到内存，"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 cpu 我们都知道，就是用来处理指令的，指令来自我们写的程序，那我们写的程序是怎么进入到内存，</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-内存"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 内存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-设备"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 设备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-文件"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 文件</span></a></li></ol></li></ol>
 		</div>
 		
 		<h1 id="操作系统-os-总结—-大学的课件-参考书：王爽的-8086汇编"><a href="#操作系统-os-总结—-大学的课件-参考书：王爽的-8086汇编" class="headerlink" title="操作系统(os)总结—-大学的课件(参考书：王爽的 8086汇编)"></a>操作系统(os)总结—-大学的课件(参考书：王爽的 8086汇编)</h1><ol>
@@ -119,10 +119,18 @@
 段或者页位基础的，所以相应的置换算法就叫做，页面置换算法 ，段置换算法。当然了也可以把段和页结合起来，使用段页式
 内存管理，这样就可以结合俩者的优点。这里写的都是很粗略的东西，具体还是要看书。
 知识结构图如下：
-</code></pre><p>##3.3 设备<br>          设备的管理，发展到现在主要处理分为四步： — 应用程序的调用<br>                                                     — 设备独立性软件<br>                                                       — 设备驱动程序<br>                                                         — i/o 中断<br>      因为我们在编程的时候，读写文件就是通过一些库函数提供的方法，read write 等方法直接使用的，不管我换个操作系统，还是换个<br>      硬件对于我们编程事没有影响的，这个牛逼的功能就是设备独立性软件提供的，让我们对设备的操作独立于设备硬件，在这一层会把逻辑<br>      设备转为物理设备，并且调用设备驱动程序来处理相应的i/o 操作。</p>
-<pre><code>只是结构图如下： 
-</code></pre><p>##3.4 文件<br>          文件的逻辑结构，物理机构</p>
-<pre><code>只是结构图如下： 
+</code></pre><h2 id="3-3-设备"><a href="#3-3-设备" class="headerlink" title="3.3 设备"></a>3.3 设备</h2><pre><code>    设备的管理，发展到现在主要处理分为四步： --- 应用程序的调用
+                                               --- 设备独立性软件
+                                                 --- 设备驱动程序
+                                                   --- i/o 中断 
+因为我们在编程的时候，读写文件就是通过一些库函数提供的方法，read write 等方法直接使用的，不管我换个操作系统，还是换个
+硬件对于我们编程事没有影响的，这个牛逼的功能就是设备独立性软件提供的，让我们对设备的操作独立于设备硬件，在这一层会把逻辑
+设备转为物理设备，并且调用设备驱动程序来处理相应的i/o 操作。
+
+只是结构图如下： 
+</code></pre><h2 id="3-4-文件"><a href="#3-4-文件" class="headerlink" title="3.4 文件"></a>3.4 文件</h2><pre><code>    文件的逻辑结构，物理机构
+
+只是结构图如下： 
 </code></pre><p>–&gt;</p>
 <p>-&gt;</p>
   
@@ -144,18 +152,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/05/20/OS/" title="OS">
+ <a href="/2016/05/20/phototest/" title="phototest">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  OS</span>
+  phototest</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/05/20/postName/"  title="postName">
+<a href="/2016/05/20/OS/"  title="OS">
  <strong>NEXT:</strong><br/> 
- <span>postName
+ <span>OS
 </span>
 </a>
 </div>
